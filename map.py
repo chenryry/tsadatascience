@@ -16,10 +16,10 @@ midata = data[24:]
 ncgdf["ZCTA5CE10"] = ncgdf["ZCTA5CE10"].astype(str)
 ncdata["ZIP Code"] = ncdata["ZIP Code"].astype(str)
 
-# Merge datasets to ensure all ZIP codes match
+
 merged_data = ncgdf.merge(ncdata, left_on="ZCTA5CE10", right_on="ZIP Code", how="left")
 
-# Compute centroids if lat/lon are missing
+
 if "latitude" not in ncdata.columns or "longitude" not in ncdata.columns:
     merged_data["centroid"] = merged_data.geometry.centroid
     merged_data["latitude"] = merged_data["centroid"].y
@@ -41,10 +41,10 @@ folium.Choropleth(
 
 
 for _, row in merged_data.iterrows():
-    if pd.notna(row["latitude"]) and pd.notna(row["longitude"]):  # Ensure no missing values
+    if pd.notna(row["latitude"]) and pd.notna(row["longitude"]): 
         folium.CircleMarker(
             location=[row["latitude"], row["longitude"]],
-            radius=row["Vacancy Rates"]* 30,  # Adjust scale
+            radius=row["Vacancy Rates"]* 30,  
             color="blue",
             fill=True,
             fill_opacity=0.6,
@@ -56,10 +56,10 @@ for _, row in merged_data.iterrows():
 migdf["ZCTA5CE10"] = migdf["ZCTA5CE10"].astype(str)
 midata["ZIP Code"] = midata["ZIP Code"].astype(str)
 
-# Merge datasets to ensure all ZIP codes match
+
 merged_data_mi = migdf.merge(midata, left_on="ZCTA5CE10", right_on="ZIP Code", how="left")
 
-# Compute centroids if lat/lon are missing
+
 if "latitude" not in midata.columns or "longitude" not in midata.columns:
     merged_data_mi["centroid"] = merged_data_mi.geometry.centroid
     merged_data_mi["latitude"] = merged_data_mi["centroid"].y
