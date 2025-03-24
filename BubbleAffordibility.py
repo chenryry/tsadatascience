@@ -28,7 +28,7 @@ fig = px.scatter(
     color='City',
     hover_data={'ZIP Code': True, 'More than 30 percent': True},
     color_discrete_map={'Charlotte': 'blue', 'Detroit': 'red'},
-    title='Income Inequality vs. Median Home Price (sizing relatively indexed)',
+    title='Income Inequality vs. Median Home Price',
     labels={
         'Gini Index': 'Income Inequality (Gini Index)',
         'Median Home Value': 'Median Home Value',
@@ -37,18 +37,20 @@ fig = px.scatter(
     size_max=50
 )
 
-fig.update_traces(marker=dict(sizemode='area', opacity=0.4))
+fig.update_traces(marker=dict(sizemode='area', opacity=0.3))
 
 fig.update_layout(
     template='simple_white',
-    title_font_size=24,
-    font=dict(size=14),
-    legend=dict(title='City', orientation='h', x=0.5, xanchor='center', y=-0.2),
-    hoverlabel=dict(bgcolor="white", font_size=13, font_family="Arial"),
+    title_font_size=60,
+    title=dict(y=0.99),
+    font=dict(size=38),
+    legend=dict(title='City', orientation='h', x=0.5, xanchor='center', y=-0.2, font=dict(size=36)),
+    hoverlabel=dict(bgcolor="white", font_size=39, font_family="Arial"),
     plot_bgcolor='rgba(0,0,0,0)',
     paper_bgcolor='rgba(0,0,0,0)',
     margin=dict(l=40, r=40, t=60, b=60),
-    yaxis=dict(range=[y_min_adjusted, y_max_adjusted])
+    yaxis=dict(range=[y_min_adjusted, y_max_adjusted], tickfont=dict(size=36)),
+    xaxis=dict(tickfont=dict(size=36))
 )
 
 fig.show()
